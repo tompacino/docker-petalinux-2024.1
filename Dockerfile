@@ -138,6 +138,12 @@ RUN rm -f petalinux_installation_log
 USER root
 RUN echo "source /opt/${PETALINUX_BASE}/settings.sh" >> /etc/bash.bashrc
 
+# Install ble.sh
+RUN git clone --recursive --depth 1 --shallow-submodules https://github.com/akinomyoga/ble.sh.git /opt/ble.sh && \
+    make -C /opt/ble.sh install PREFIX=/usr/local && \
+    echo 'source /usr/local/share/blesh/ble.sh' >> /etc/bash.bashrc && \
+    rm -rf /opt/ble.sh
+
 # Set default shell to /bin/bash
 SHELL ["/bin/bash", "-c"]
 ENV SHELL /bin/bash

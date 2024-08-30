@@ -8,6 +8,7 @@ This is a fork of [docker-petalinux](https://github.com/matthieu-labas/docker-pe
 - License skip command line argument changed for 2024.1
 - Default shell in the docker image set to __/bin/bash__ as required by petalinux
 - Default docker container name changed in __petalin.sh__
+- Added ble.sh for a better bash experience after running petalin.sh
 
 The original README.md from [docker-petalinux](https://github.com/matthieu-labas/docker-petalinux) is copied below:
 
