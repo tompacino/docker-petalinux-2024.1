@@ -144,6 +144,20 @@ RUN git clone --recursive --depth 1 --shallow-submodules https://github.com/akin
     echo 'source /usr/local/share/blesh/ble.sh' >> /etc/bash.bashrc && \
     rm -rf /opt/ble.sh
 
+# Install Starship shell prompt
+RUN apt-get update && apt-get install -y curl && \
+    curl -sS https://starship.rs/install.sh | sh -s -- --yes && \
+    echo 'eval "$(starship init bash)"' >> /etc/bash.bashrc
+
+# Copy custom starship configuration
+COPY starship.toml /etc/starship.toml
+
+# Set up Starship in bash and specify custom config file
+RUN echo 'export STARSHIP_CONFIG=/etc/starship.toml' >> /etc/bash.bashrc
+
+# Ensure Starship is in PATH for all users
+RUN echo 'export PATH="/usr/local/bin:$PATH"' >> /etc/profile
+
 # Set default shell to /bin/bash
 SHELL ["/bin/bash", "-c"]
 ENV SHELL /bin/bash
